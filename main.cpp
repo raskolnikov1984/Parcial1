@@ -21,6 +21,7 @@ int main()
             char palabra1[20];
             cin>>palabra1;
 
+            /*
             Aux = new char*[n];
             Copiar(Categorias,Aux,n);
 
@@ -29,19 +30,25 @@ int main()
             Categorias = new char*[n];
             Copiar(Aux,Categorias,n-1);
 
-            Categorias[n-1] = new char[20];
+            Categorias[n-1] = new char[sizeChar(palabra1)];
             for (int i = 0; i < sizeChar(palabra1); i++){
-                Categorias[n-1][i] = palabra1[i];
+               Categorias[n-1][i] = palabra1[i];
             }
-            //attach(Categorias,Aux,ptrn,palabra1);
+            */
+            Categorias=attach(Categorias,Aux,ptrn,palabra1);
 
             break;
 
+
         case 3:
+
+            cout<<(Categorias[0]);
+            /*
             char palabra[]="piolin";
             cout<<(check(Categorias,n,palabra));
             edit(Categorias[0]);
             cout << (Categorias[0]);
+            */
             break;
         }
     }while(opcion!=0);

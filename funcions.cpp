@@ -26,39 +26,14 @@ void menu(int *opc){
 
 void Copiar(char **Origen, char **Destino, int n){
     for (int i = 0; i < n; ++i) {
-        Destino[i] = new char[20];
+
+        Destino[i] = new char[(sizeChar(Origen[i]))-1];
         Destino[i] = Origen[i];
     }
     delete[] Origen;
     Origen = nullptr;
 }
 
-/*  En le caso de manipular datos tipo diferentes a char
-    mediante punteros dobles(por ejemplo tipo int), debemos
-    recorrer posicion por posición:
-
-    int **Datos = new int*[5];
-    for(int i = 0; i<5; i++){
-        Datos[i] = new int[10];
-        for(int j=0; j<10; j++){
-            //Datos[i][j] = 10*i+j;
-            *(*(Datos+i)+j) = 10*i+j;
-        }
-    }
-
-    for(int i = 0; i<5; i++){
-        for(int j=0; j<10; j++){
-            cout << Datos[i][j] << " ";
-        }
-        cout<<endl;
-    }
-
-    for(int i = 0; i<5; i++){
-        delete[] Datos[i];
-    }
-    delete[] Datos;
-    Datos = nullptr;
-*/
 
 int sizeChar(char* word){
     bool condi = true;
@@ -110,7 +85,7 @@ bool check(char** Arreglo, int n, char* word){
     return false;
 }
 
-void attach(char** Arreglo, char** Almacenar, int* n, char* word){
+char** attach(char** Arreglo, char** Almacenar, int* n, char* word){
     if (check(Arreglo,*n,word) == false){
 
         Almacenar = new char*[*n];
@@ -121,10 +96,13 @@ void attach(char** Arreglo, char** Almacenar, int* n, char* word){
         Arreglo = new char*[*n];
         Copiar(Almacenar,Arreglo,*n-1);
 
-        Arreglo[*n-1] = new char[20];
+        Arreglo[*n-1] = new char[sizeChar(word)];
         for (int i = 0; i < sizeChar(word); i++){
             Arreglo[*n-1][i] = word[i];
         }
+        Arreglo[*n-1][sizeChar(word)]=0;
+
+        return Arreglo;
 
     }
 }
