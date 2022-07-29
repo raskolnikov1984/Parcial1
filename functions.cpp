@@ -1,24 +1,24 @@
-#include "functions.h"
+#include "declare.h"
 
 using namespace std;
 
 int main_menu(void){
-  
-  int option;
-  bool repeat = true;
 
-  do{
+    int option;
+    bool repeat = true;
 
-    system("cls");
+    do{
+
+        system("cls");
 
         cout << "\n\n\t\t\tMENU PRINCIPAL" << endl;
         cout << "\t\t\t--------------" << endl;
         cout << "\n\t. Operaciones basicas" << endl;
-	cout << "\n\t1. Administrar Usuarios"<< endl;
-	cout << "\n\t2. Administrar Categorías"<< endl;
+        cout << "\n\t1. Administrar Usuarios"<< endl;
+        cout << "\n\t2. Administrar Categorías"<< endl;
         cout << "\t. Transaccionales" << endl;
-	cout << "\n\t3. Listar Registros"<< endl;
-	
+        cout << "\n\t3. Listar Registros"<< endl;
+
         cout << "\t0. SALIR" << endl;
 
         cout << "\n\tIngrese una option: ";
@@ -27,37 +27,37 @@ int main_menu(void){
         switch (option)
         {
         case 1:
-	    repeat = false;
+            repeat = false;
             break;
 
         case 2:
-	  repeat = false;
-          break;
+            repeat = false;
+            break;
 
         case 3:
-	  repeat = false;
-          break;
+            repeat = false;
+            break;
 
-	case 4:
-	  repeat = false;
-          break;
-	  
+        case 4:
+            repeat = false;
+            break;
+
         case 0:
             repeat = false;
             break;
-	default:
-	  repeat = true;
+        default:
+            repeat = true;
         }
     } while (repeat);
-  return option;
+    return option;
 }
 
 int  user_menu(void){
-  int option;
-  bool repeat = true;
+    int option;
+    bool repeat = true;
 
-  do{
-    system("cls");
+    do{
+        system("cls");
 
         cout << "\n\n\t\t\tMENU USERS" << endl;
         cout << "\t\t\t--------------" << endl;
@@ -67,33 +67,33 @@ int  user_menu(void){
 
         cout << "\n\tIngrese una option: ";
         cin >> option;
-	
+
         switch (option)
         {
         case 1:
-	    repeat = false;
+            repeat = false;
             break;
 
         case 2:
-	  repeat = false;
-          break;
+            repeat = false;
+            break;
 
         case 0:
             repeat = false;
             break;
-	default:
-	  repeat = true;
+        default:
+            repeat = true;
         }
-  } while (repeat);
-  return option;
+    } while (repeat);
+    return option;
 }
 
 void categories_menu(){
-  int option;
-  bool repeat = true;
+    int option;
+    bool repeat = true;
 
-  do{
-    system("cls");
+    do{
+        system("cls");
 
         cout << "\n\n\t\t\tMENU CATEGORIES" << endl;
         cout << "\t\t\t--------------" << endl;
@@ -103,58 +103,58 @@ void categories_menu(){
 
         cout << "\n\tIngrese una option: ";
         cin >> option;
-  } while (repeat);
+    } while (repeat);
 }
 
 
 char* get_dates_user(char* campo){
-  /*función que se encarga de pedir datos de usuarios*/
-  int sizeWord,numchar = 0;
-  bool palabra = true;
-  const int charMax = 30; //longitud máxima de caracteres
-  char* valField;
-  do{
-  char* Aux = new char[charMax];
-  cout << "\n\t Por favor Ingrese el valor del campo: "<<campo<<endl;
-  cin>>Aux;
+    /*función que se encarga de pedir datos de usuarios*/
+    int sizeWord,numchar = 0;
+    bool palabra = true;
+    const int charMax = 30; //longitud máxima de caracteres
+    char* valField;
+    do{
+        char* Aux = new char[charMax];
+        cout << "\n\t Por favor Ingrese el valor del campo: "<<campo<<endl;
+        cin>>Aux;
 
-  sizeWord = sizeChar(Aux);
-  palabra = isWord(Aux, sizeWord);
-  if(palabra==false || palabra == 0){
-    delete[] Aux;
-    Aux = nullptr;
-    cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
-  }else{
-    valField = new char[sizeWord];
-    copiarUni(Aux, valField, sizeWord);
+        sizeWord = sizeChar(Aux);
+        palabra = isWord(Aux, sizeWord);
+        if(palabra==false || palabra == 0){
+            delete[] Aux;
+            Aux = nullptr;
+            cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
+        }else{
+            valField = new char[sizeWord];
+            copiarUni(Aux, valField, sizeWord);
+            return valField;
+            delete[] Aux;
+            Aux = nullptr;}
+    }while(palabra == false || palabra != 0);
     return valField;
-    delete[] Aux;
-    Aux = nullptr;}
-  }while(palabra == false || palabra != 0);
-return valField;
 }
 
 void user_admin(char** User){
-  /*función que permite administrar usuarios.*/
-  int option;
-  option = user_menu();
-  switch (option)
-  {
-  case 1:
-    //attach();
-    break;
-  case 2:
-    //print_array();
-    break;
-  }
+    /*función que permite administrar usuarios.*/
+    int option;
+    option = user_menu();
+    switch (option)
+    {
+    case 1:
+        //attach();
+        break;
+    case 2:
+        //print_array();
+        break;
+    }
 }
 
 void categories_admin(){
-  /*función que permite administrar categoráis.*/
+    /*función que permite administrar categoráis.*/
 }
 
 void search_records(){
-  /*función que permita buscar registros dependiendo
+    /*función que permita buscar registros dependiendo
     de los parametros suministrados*/
 }
 
@@ -182,11 +182,11 @@ void imprimir1(char **Arreglo, int n){
 
 
 void transactions_menu(){
-  int option;
-  bool repeat = true;
+    int option;
+    bool repeat = true;
 
-  do{
-    system("cls");
+    do{
+        system("cls");
 
         cout << "\n\n\t\t\tMENU TRANSACTIONS" << endl;
         cout << "\t\t\t--------------" << endl;
@@ -196,7 +196,7 @@ void transactions_menu(){
 
         cout << "\n\tIngrese una option: ";
         cin >> option;
-  }while(repeat);
+    }while(repeat);
 }
 
 void menu(int *opc){
@@ -212,50 +212,101 @@ void menu(int *opc){
 }
 
 int sizeChar(char* word){
-  /*Función que se encarga de retornar un entero
+    /*Función que se encarga de retornar un entero
     cuyo valor es la longitud de un conjunto de
     caracteres*/
-  bool condi = true;
-  int i = 0;
+    bool condi = true;
+    int i = 0;
 
-  //Se itera mientras no se encuentre el caracter nulo.
-  while(condi == true){
-    if(word[i] != 0){
-      i++;
-    }else{condi = false;}
-  }return i;
+    //Se itera mientras no se encuentre el caracter nulo.
+    while(condi == true){
+        if(word[i] != 0){
+            i++;
+        }else{condi = false;}
+    }return i;
 }
 
 bool isWord(char* word, int n){
-  bool palabra = true;
-  for(int i = 0; i<n; i++){
-    palabra = isletter(*(word + i));
-    if(palabra==false){
-      break;
-      return palabra;
-    }
-  }return palabra;
+    bool palabra = true;
+    for(int i = 0; i<n; i++){
+        palabra = isletter(*(word + i));
+        if(palabra==false){
+            break;
+            return palabra;
+        }
+    }return palabra;
 }
 bool isletter(char a){
-  /*Funcion qeu se encarga de verificar si el caracter
+    /*Funcion qeu se encarga de verificar si el caracter
     es una letra*/
-  if ((a >= 97 | a <= 122) && (a >= 65 | a <= 90))
+    if ((a >= 97 && a <= 122) || (a >= 65 && a <= 90))
     {
-    return true;
+        return true;
     }else{
-    return false;
-  }
+        return false;
+    }
 }
 
 bool isnumber(char a){
-  /*Funcion que se encarga de verificar si el caracter
+    /*Funcion que se encarga de verificar si el caracter
     es un número*/
-    if (a>=48 && a<=57){
-        return true;
+    if (a>=48 && a<=57) return true;
+    else return false;
+}
+
+int numInt(char* num){
+    int size = sizeChar(num), place = pow(10,size-1), sum = 0;
+    for (int i = 0; i<size; i++){
+        if (isnumber(num[i]) == true){
+            sum = sum+((num[i]-48)*place);
+            place /= 10;
+        }
     }
-    else{
+    return sum;
+}
+
+
+bool isDate(char* date){
+    int size = sizeChar(date);
+    int dia = 0, mes = 0, año = 0, availday = 0;
+    char day[3]= {}; char month[3]={}; char year[5];
+
+    //DD/MM/AAAA => size=10
+
+    if (size == 10){
+        day[0] = date[0];
+        day[1] = date[1];
+        day[2] = 0;
+        month[0] = date[3];
+        month[1] = date[4];
+        month[2] = 0;
+        year[0] = date[6];
+        year[1] = date[7];
+        year[2] = date[8];
+        year[3] = date[9];
+        year[4] = 0;
+
+        año = numInt(year);
+        if (año > 0){
+             mes = numInt(month);
+             if (mes >=1 && mes <=12){
+                 availday = dayMonth(mes,año);
+                 dia = numInt(day);
+                 if (dia <= availday && dia >0) return true;
+             }
+        }
         return false;
     }
+    else return false;
+}
+
+int dayMonth(int month, int year){
+    if (month == 4 || month == 6 || month == 9 || month == 11) return 30;
+    else if (month == 2){
+        if ((year % 4 == 0) || ((year % 100 !=0) && (year % 400 ==0))) return 29;
+        else return 28;
+    }
+    else return 31;
 }
 
 bool edit(char* word){
@@ -263,10 +314,10 @@ bool edit(char* word){
     for (int i = 0; i < size; i++){
         if (isletter(word[i]) == true){
             if (i==0){
-                if (word[0] >= 97 | word[0] <= 122) word[i] -= 32;
+                if (word[0] >= 97 && word[0] <= 122) word[i] -= 32;
             }
             else{
-               if (word[0] >= 65 | word[0] <= 90) word[i] +=32;
+                if (word[0] >= 65 && word[0] <= 90) word[i] +=32;
             }
         }
         else word[i]=0;
@@ -276,44 +327,44 @@ bool edit(char* word){
 }
 
 void copiarUni(char* Origen, char* Destino, int n){
-  for(int i=0; i<n; i++){
-    *(Origen+i) = *(Destino+i);
-  }
+    for(int i=0; i<n; i++){
+        *(Origen+i) = *(Destino+i);
+    }
 }
 void copiar(char **Origen, char **Destino, int n){
-  /*
+    /*
   Función que se encarga de copiar de un arreglo bidimensional a otro
   */
-  for (int i = 0; i < n; ++i){
-    Destino[i] = new char[(sizeChar(Origen[i]))-1];
-    Destino[i] = Origen[i];
+    for (int i = 0; i < n; ++i){
+        Destino[i] = new char[(sizeChar(Origen[i]))-1];
+        Destino[i] = Origen[i];
     }
 
-  delete[] Origen;
-  Origen = nullptr;
+    delete[] Origen;
+    Origen = nullptr;
 }
 
 bool check(char** Arreglo, int n, char* word){
-  if (n == 0){
-    return false;
-  }
-  int sizeWord = sizeChar(word), cont = 0;
-  for(int i = 0; i < n; ++i){
-    for(int j = 0; j < (sizeChar(Arreglo[i])-1); j++){
-      if (Arreglo[i][j] == word[j]){
-	cont++;
-      }
+    if (n == 0){
+        return false;
     }
-    if(cont == (sizeWord-1)){
-      return true;
-    }else {cont=0;}
-  }
-  return false;
+    int sizeWord = sizeChar(word), cont = 0;
+    for(int i = 0; i < n; ++i){
+        for(int j = 0; j < (sizeChar(Arreglo[i])-1); j++){
+            if (Arreglo[i][j] == word[j]){
+                cont++;
+            }
+        }
+        if(cont == (sizeWord-1)){
+            return true;
+        }else {cont=0;}
+    }
+    return false;
 }
 
 
 char** attach(char** Arreglo, char** Almacenar, int* n, char* word){
-  /* Función que permite agregar registros al arreglo
+    /* Función que permite agregar registros al arreglo
      realizando una copia en otro arreglo bidimensional */
     if (check(Arreglo,*n,word) == false){
         Almacenar = new char*[*n];
@@ -328,7 +379,7 @@ char** attach(char** Arreglo, char** Almacenar, int* n, char* word){
         for (int i = 0; i < sizeChar(word); i++){
             Arreglo[*n-1][i] = word[i];
         }
-	Arreglo[*n-1][sizeChar(word)]=0;
+        Arreglo[*n-1][sizeChar(word)]=0;
 
     }return Arreglo;
 }
