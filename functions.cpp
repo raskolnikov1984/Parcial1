@@ -56,14 +56,9 @@ int  user_menu(void){
     int option;
     bool repeat = true;
 
-<<<<<<< HEAD
-  do{
-    system("clear");
-=======
     do{
         system("cls");
->>>>>>> 4a937e490878a3b93f12127fa2bbbf886b93e484
-
+      
         cout << "\n\n\t\t\tMENU USERS" << endl;
         cout << "\t\t\t--------------" << endl;
         cout << "\n\t1. Registrar Usuario" << endl;
@@ -111,33 +106,24 @@ void categories_menu(){
     } while (repeat);
 }
 
-
-<<<<<<< HEAD
 char* get_dates_user(int numeroCampo){
   /*función que se encarga de pedir datos de usuarios*/
   char* Aux;
   int sizeWord,numchar = 0;
   bool palabra = true;
   const int charMax = 30; //longitud máxima de caracteres
-  //char* valField;
 
   switch(numeroCampo){
   case 1:
     do{
       Aux = new char[charMax];
-      //cout << "\n\t Por favor Ingrese el valor del campo: "<<campo<<endl;
       cin>>Aux;
       sizeWord = sizeChar(Aux);
       palabra = isWord(Aux, sizeWord);
       if(palabra==false || palabra == 0){
-	//delete[] Aux;
-	//Aux = nullptr;
 	cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
       }else{
-	//valField = new char[sizeWord];
-	//copiarUni(Aux, valField, sizeWord);
 	return Aux;
-	//return valField;
 	delete[] Aux;
 	Aux = nullptr;
       }
@@ -166,7 +152,7 @@ void user_admin(char** User){
   char* day[2], month[2], year[4];
   int option;
   int n=0;
-  //char* user_data = 
+
   option = user_menu();
   switch(option)
     {
@@ -210,61 +196,19 @@ void user_admin(char** User){
       cout<<name;
       cout<<apellidos;
       cout<<dateBirthday;
-      //attach();
+
       break;
   case 2:
     //print_array();
     break;
   }
-=======
-char* get_dates_user(char* campo){
-    /*función que se encarga de pedir datos de usuarios*/
-    int sizeWord,numchar = 0;
-    bool palabra = true;
-    const int charMax = 30; //longitud máxima de caracteres
-    char* valField;
-    do{
-        char* Aux = new char[charMax];
-        cout << "\n\t Por favor Ingrese el valor del campo: "<<campo<<endl;
-        cin>>Aux;
-
-        sizeWord = sizeChar(Aux);
-        palabra = isWord(Aux, sizeWord);
-        if(palabra==false || palabra == 0){
-            delete[] Aux;
-            Aux = nullptr;
-            cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
-        }else{
-            valField = new char[sizeWord];
-            copiarUni(Aux, valField, sizeWord);
-            return valField;
-            delete[] Aux;
-            Aux = nullptr;}
-    }while(palabra == false || palabra != 0);
-    return valField;
 }
 
-void user_admin(char** User){
-    /*función que permite administrar usuarios.*/
-    int option;
-    option = user_menu();
-    switch (option)
-    {
-    case 1:
-        //attach();
-        break;
-    case 2:
-        //print_array();
-        break;
-    }
->>>>>>> 4a937e490878a3b93f12127fa2bbbf886b93e484
-}
-
-void categories_admin(){
+void categories_admin(void){
     /*función que permite administrar categoráis.*/
 }
 
-void search_records(){
+void search_records(void){
     /*función que permita buscar registros dependiendo
     de los parametros suministrados*/
 }
