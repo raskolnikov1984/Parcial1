@@ -27,7 +27,10 @@ void copiarUni(char* Origen, char* Destino, int n); //copia volores de un arregl
 int sizeChar(char* word); //Se determina la longitud de un arreglo de char
 bool isletter(char a); //Verifica si es una letra
 bool isnumber(char a); //Verifica si es un número
+int tamano_arreglo_int(int entero);
+char* entero_to_caracter(int entero);
 bool isWord(char* word, int n);
+bool isInteger(char* integer, int n);
 bool edit(char* word);  //Corrije la palabra y la deja en el formato que se esta trabajando
 bool check(char** Arreglo, int n, char* word); //Funcion que verifica si no existe dicho word en la lista
 char** attach(char** Arreglo, char** Almacenar, int* n, char* word); //Agrega elementos a un arreglo

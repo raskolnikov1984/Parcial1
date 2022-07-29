@@ -57,7 +57,7 @@ int  user_menu(void){
   bool repeat = true;
 
   do{
-    system("cls");
+    system("clear");
 
         cout << "\n\n\t\t\tMENU USERS" << endl;
         cout << "\t\t\t--------------" << endl;
@@ -107,42 +107,105 @@ void categories_menu(){
 }
 
 
-char* get_dates_user(char* campo){
+char* get_dates_user(int numeroCampo){
   /*función que se encarga de pedir datos de usuarios*/
+  char* Aux;
   int sizeWord,numchar = 0;
   bool palabra = true;
   const int charMax = 30; //longitud máxima de caracteres
-  char* valField;
-  do{
-  char* Aux = new char[charMax];
-  cout << "\n\t Por favor Ingrese el valor del campo: "<<campo<<endl;
-  cin>>Aux;
+  //char* valField;
 
-  sizeWord = sizeChar(Aux);
-  palabra = isWord(Aux, sizeWord);
-  if(palabra==false || palabra == 0){
-    delete[] Aux;
-    Aux = nullptr;
-    cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
-  }else{
-    valField = new char[sizeWord];
-    copiarUni(Aux, valField, sizeWord);
-    return valField;
-    delete[] Aux;
-    Aux = nullptr;}
-  }while(palabra == false || palabra != 0);
-return valField;
+  switch(numeroCampo){
+  case 1:
+    do{
+      Aux = new char[charMax];
+      //cout << "\n\t Por favor Ingrese el valor del campo: "<<campo<<endl;
+      cin>>Aux;
+      sizeWord = sizeChar(Aux);
+      palabra = isWord(Aux, sizeWord);
+      if(palabra==false || palabra == 0){
+	//delete[] Aux;
+	//Aux = nullptr;
+	cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
+      }else{
+	//valField = new char[sizeWord];
+	//copiarUni(Aux, valField, sizeWord);
+	return Aux;
+	//return valField;
+	delete[] Aux;
+	Aux = nullptr;
+      }
+    }while(palabra == false || palabra != 0);
+    
+  case 0:
+    int document, sizeEntero;
+    char* charDocument;
+    cin>>document;
+    sizeEntero = tamano_arreglo_int(document);
+    Aux = new char[sizeEntero];
+    charDocument = entero_to_caracter(document);
+    for(int i=0; i < sizeEntero; i++){
+      *(Aux+i) = *(charDocument+i);
+    }
+  }
+  return Aux;
 }
 
 void user_admin(char** User){
   /*función que permite administrar usuarios.*/
+  const int charMax = 30; //longitud máxima de caracteres
+  char* document = new char[charMax];
+  char* name = new char[charMax];
+  char* apellidos = new char[charMax];
+  char* day[2], month[2], year[4];
   int option;
+  int n=0;
+  //char* user_data = 
   option = user_menu();
-  switch (option)
-  {
-  case 1:
-    //attach();
-    break;
+  switch(option)
+    {
+    case 1:
+      char dn[2], mn[2], an[4];
+      char dateBirthday[12];
+      cout<<"\t\t\t-------------------------------------------------";
+      cout << "\n\t Por favor Ingrese el valor del campo Documento: ";
+      cin>>document;
+      cout << "\n\t Por favor Ingrese el valor del campo Nombre: ";
+      name = get_dates_user(1);
+      cout << "\n\t Por favor Ingrese el valor del campo Apellidos: ";
+      apellidos = get_dates_user(1);
+      cout<<"\t\t\t-------------FECHA DE NACIMIENTO----------------";
+
+      //Introducir por teclado la fecha de nacimiento
+      cout << "\n\tFecha de nacimiento:\n";
+      cout << "\n\tDia: ";
+      cin >> dn;
+      cout << "\n\tMes: ";
+      cin >> mn;
+      cout << "\n\tAnio: ";
+      cin >> an;
+
+      for(int i=0; i<sizeof(dn); i++){
+	dateBirthday[i] = dn[i];
+      }
+      dateBirthday[2] = '/';
+      n+=3;
+      for(int i=0; i<sizeof(mn); i++){
+	dateBirthday[n] = mn[i];
+	n++;
+      }
+      dateBirthday[n] = '/';
+      for(int i=0; i<sizeof(an); i++){
+	n++;
+	dateBirthday[n] = an[i];
+      }
+
+      cout<<document;
+      cout<<name;
+      cout<<apellidos;
+      cout<<dateBirthday;
+      //attach();
+      break;
   case 2:
     //print_array();
     break;
@@ -236,6 +299,7 @@ bool isWord(char* word, int n){
     }
   }return palabra;
 }
+
 bool isletter(char a){
   /*Funcion qeu se encarga de verificar si el caracter
     es una letra*/
@@ -256,6 +320,28 @@ bool isnumber(char a){
     else{
         return false;
     }
+}
+
+char* entero_to_caracter(int entero){
+  int sizeEntero = (tamano_arreglo_int(entero));
+  char* Cadena = new char[sizeEntero];
+
+  for(int i=0;i<sizeEntero;i++){
+    Cadena[sizeEntero-i] = (entero % 10)+48;
+    entero = entero / 10;
+  }return Cadena;
+}
+
+int tamano_arreglo_int(int entero){
+  bool ban = true;
+  int i=0, residuo=0;
+
+  while(entero > 0){
+    residuo = entero % 10;
+    entero = entero / 10;
+    i++;
+    
+  }return i;
 }
 
 bool edit(char* word){

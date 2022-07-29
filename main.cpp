@@ -16,7 +16,7 @@ int main()
     switch(option)
     {
     case 1:
-      //user_admin();
+      user_admin(Users);
       run = false;
       break;
     case 2:
