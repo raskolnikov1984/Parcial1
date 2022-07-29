@@ -3,6 +3,7 @@
 using namespace std;
 
 int main_menu(void){
+  
   int option;
   bool repeat = true;
 
@@ -106,7 +107,34 @@ void categories_menu(){
 }
 
 
-void user_admin(){
+char* get_dates_user(char* campo){
+  /*función que se encarga de pedir datos de usuarios*/
+  int sizeWord,numchar = 0;
+  bool palabra = true;
+  const int charMax = 30; //longitud máxima de caracteres
+  char* valField;
+  do{
+  char* Aux = new char[charMax];
+  cout << "\n\t Por favor Ingrese el valor del campo: "<<campo<<endl;
+  cin>>Aux;
+
+  sizeWord = sizeChar(Aux);
+  palabra = isWord(Aux, sizeWord);
+  if(palabra==false || palabra == 0){
+    delete[] Aux;
+    Aux = nullptr;
+    cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
+  }else{
+    valField = new char[sizeWord];
+    copiarUni(Aux, valField, sizeWord);
+    return valField;
+    delete[] Aux;
+    Aux = nullptr;}
+  }while(palabra == false || palabra != 0);
+return valField;
+}
+
+void user_admin(char** User){
   /*función que permite administrar usuarios.*/
   int option;
   option = user_menu();
@@ -183,17 +211,6 @@ void menu(int *opc){
     cin >> *opc;
 }
 
-void Copiar(char **Origen, char **Destino, int n){
-    for (int i = 0; i < n; ++i) {
-
-        Destino[i] = new char[(sizeChar(Origen[i]))-1];
-        Destino[i] = Origen[i];
-    }
-    delete[] Origen;
-    Origen = nullptr;
-}
-
-
 int sizeChar(char* word){
   /*Función que se encarga de retornar un entero
     cuyo valor es la longitud de un conjunto de
@@ -209,6 +226,16 @@ int sizeChar(char* word){
   }return i;
 }
 
+bool isWord(char* word, int n){
+  bool palabra = true;
+  for(int i = 0; i<n; i++){
+    palabra = isletter(*(word + i));
+    if(palabra==false){
+      break;
+      return palabra;
+    }
+  }return palabra;
+}
 bool isletter(char a){
   /*Funcion qeu se encarga de verificar si el caracter
     es una letra*/
@@ -218,6 +245,17 @@ bool isletter(char a){
     }else{
     return false;
   }
+}
+
+bool isnumber(char a){
+  /*Funcion que se encarga de verificar si el caracter
+    es un número*/
+    if (a>=48 && a<=57){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 bool edit(char* word){
@@ -235,6 +273,24 @@ bool edit(char* word){
         return false;
     }
     return true;
+}
+
+void copiarUni(char* Origen, char* Destino, int n){
+  for(int i=0; i<n; i++){
+    *(Origen+i) = *(Destino+i);
+  }
+}
+void copiar(char **Origen, char **Destino, int n){
+  /*
+  Función que se encarga de copiar de un arreglo bidimensional a otro
+  */
+  for (int i = 0; i < n; ++i){
+    Destino[i] = new char[(sizeChar(Origen[i]))-1];
+    Destino[i] = Origen[i];
+    }
+
+  delete[] Origen;
+  Origen = nullptr;
 }
 
 bool check(char** Arreglo, int n, char* word){
@@ -261,12 +317,12 @@ char** attach(char** Arreglo, char** Almacenar, int* n, char* word){
      realizando una copia en otro arreglo bidimensional */
     if (check(Arreglo,*n,word) == false){
         Almacenar = new char*[*n];
-        Copiar(Arreglo,Almacenar,*n);
+        copiar(Arreglo,Almacenar,*n);
 
         *n = *n + 1;
 
         Arreglo = new char*[*n];
-        Copiar(Almacenar,Arreglo,*n-1);
+        copiar(Almacenar,Arreglo,*n-1);
 
         Arreglo[*n-1] = new char[sizeChar(word)];
         for (int i = 0; i < sizeChar(word); i++){

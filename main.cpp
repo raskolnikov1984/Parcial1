@@ -5,7 +5,8 @@ int main()
   char** Users; //Arreglo de Usuarios [][]
   char** Categories; //Arreglo Manejo de Categories [][]
   char** Transactions; //Arreglo Manejo de Transacciones [][]
-
+  char** Aux; //Arreglo auxiliar para realizar copias debe permanecer vacío
+  
   bool run=true;
     
   do{
