@@ -1,4 +1,4 @@
-#include "declare.h"
+#include "functions.h"
 
 int main()
 {
