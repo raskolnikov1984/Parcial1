@@ -88,22 +88,41 @@ int  user_menu(void){
     return option;
 }
 
-void categories_menu(){
+int categories_menu(void){
     int option;
     bool repeat = true;
 
     do{
         system("cls");
 
-        cout << "\n\n\t\t\tMENU CATEGORIES" << endl;
-        cout << "\t\t\t--------------" << endl;
-        cout << "\n\t1. Operaciones basicas" << endl;
+        cout << "\n\n\t\t\tMENU CATEGORIES" <<endl;
+        cout << "\t\t\t-----------------------------------" << endl;
+        cout << "\n\t1. Registrar Categorías" << endl;
         cout << "\t2. Operaciones variadas" << endl;
         cout << "\t0. SALIR" << endl;
 
         cout << "\n\tIngrese una option: ";
         cin >> option;
+
+	switch(option)
+        {
+        case 1:
+            repeat = false;
+            break;
+
+        case 2:
+            repeat = false;
+            break;
+
+        case 0:
+            repeat = false;
+            break;
+        default:
+            repeat = true;
+        }
+
     } while (repeat);
+    return option;
 }
 
 char* get_dates_user(int numeroCampo){
@@ -209,8 +228,32 @@ void user_admin(char** User){
   }
 }
 
-void categories_admin(void){
-    /*función que permite administrar categoráis.*/
+void categories_admin(char** Categorias, char** Aux){
+  /*función que permite administrar categoráis.*/
+  const int charMax = 30; //longitud máxima de caracteres
+  int option;
+  char* categoria = new char[charMax];
+  int sizeWord;
+  int* tamano;
+  int sizeCategorias;
+  option = categories_menu();
+  
+  switch(option)
+    {
+    case 1:
+      cout << "\n\t Por favor ingrese el nombre de la categoría: ";
+      categoria = get_dates_user(1) ;
+      cout << categoria;
+      sizeWord = sizeChar(categoria);
+      tamano = &sizeWord;
+      cout<<*tamano;
+      //attach(Categorias, Aux,tamano, categoria);
+      break;
+    case 2:
+      sizeCategorias = sizeof(Categorias);
+      print_array(Categorias, sizeCategorias);
+    }
+  
 }
 
 void search_records(void){
@@ -302,6 +345,14 @@ int numInt(char* num){
     return sum;
 }
 
+void get_date_today(void){
+  char fecha[25];//ctime devuelve 26 caracteres
+  time_t current_time;
+  current_time=time(NULL);
+  ctime(&current_time);
+   strcpy(fecha, ctime(&current_time));
+  printf("%s", fecha);
+}
 
 bool isDate(char* date){
     int size = sizeChar(date);
@@ -401,7 +452,7 @@ void copiar(char **Origen, char **Destino, int n){
 bool check(char** Arreglo, int n, char* word){
     if (n == 0){
         return false;
-    }
+    }else{
     int sizeWord = sizeChar(word), cont = 0;
     for(int i = 0; i < n; ++i){
         for(int j = 0; j < (sizeChar(Arreglo[i])-1); j++){
@@ -413,13 +464,19 @@ bool check(char** Arreglo, int n, char* word){
             return true;
         }else {cont=0;}
     }
-    return false;
+    }return false;
 }
-
 
 char** attach(char** Arreglo, char** Almacenar, int* n, char* word){
     /* Función que permite agregar registros al arreglo
      realizando una copia en otro arreglo bidimensional */
+  cout<<Arreglo;
+  if(sizeof(Arreglo) == 8){
+    Arreglo = new char*[*n];
+    for (int i = 0; i < sizeChar(word); i++){
+      Arreglo[*n-1][i] = word[i];
+    }
+  }else{
     if (check(Arreglo,*n,word) == false){
         Almacenar = new char*[*n];
         copiar(Arreglo,Almacenar,*n);
@@ -435,5 +492,6 @@ char** attach(char** Arreglo, char** Almacenar, int* n, char* word){
         }
         Arreglo[*n-1][sizeChar(word)]=0;
 
-    }return Arreglo;
+    }
+  }return Arreglo;
 }
