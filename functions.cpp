@@ -124,8 +124,8 @@ char* get_dates_user(int numeroCampo){
 	cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
       }else{
 	return Aux;
-	delete[] Aux;
-	Aux = nullptr;
+	//delete[] Aux;
+	//Aux = nullptr;
       }
     }while(palabra == false || palabra != 0);
     
@@ -158,15 +158,20 @@ void user_admin(char** User){
     {
     case 1:
       char dn[2], mn[2], an[4];
-      char dateBirthday[12];
-      cout<<"\t\t\t-------------------------------------------------";
+      char dateBirthday[11];
+      cout<<"\t\t\t------------------------------------------------------------";
       cout << "\n\t Por favor Ingrese el valor del campo Documento: ";
       cin>>document;
       cout << "\n\t Por favor Ingrese el valor del campo Nombre: ";
       name = get_dates_user(1);
       cout << "\n\t Por favor Ingrese el valor del campo Apellidos: ";
       apellidos = get_dates_user(1);
-      cout<<"\t\t\t-------------FECHA DE NACIMIENTO----------------";
+      cout << "\n\t Por favor Ingrese el valor del campo País: ";
+      apellidos = get_dates_user(1);
+      cout << "\n\t Por favor Ingrese el valor del campo Profesión: ";
+      apellidos = get_dates_user(1);
+
+      cout<<"\t\t\t------------------------FECHA DE NACIMIENTO-----------------";
 
       //Introducir por teclado la fecha de nacimiento
       cout << "\n\tFecha de nacimiento:\n";
@@ -224,18 +229,6 @@ void print_array(char** Array, int n){
     cout << "***********************************" << endl;
 }
 
-void imprimir1(char **Arreglo, int n){
-    cout << "\n************ Categorias ***********" << endl;
-    if (n==0) {
-        cout << "   ----- No hay Categorias -----" << endl;
-    }
-    for (int i = 0; i < n; ++i) {
-        cout << Arreglo[i] << endl;
-    }
-    cout << "***********************************" << endl;
-}
-
-
 void transactions_menu(){
     int option;
     bool repeat = true;
@@ -252,18 +245,6 @@ void transactions_menu(){
         cout << "\n\tIngrese una option: ";
         cin >> option;
     }while(repeat);
-}
-
-void menu(int *opc){
-    //int opc;
-    cout << "\nMenu" << endl;
-    cout << "1. Visualizar Categorias" << endl;
-    cout << "2. Agregar" << endl;
-    cout << "3. Eliminar" << endl;
-    cout << "0. Salir" << endl;
-
-    cout << "Seleccion: ";
-    cin >> *opc;
 }
 
 int sizeChar(char* word){
@@ -404,13 +385,8 @@ bool edit(char* word){
     return true;
 }
 
-void copiarUni(char* Origen, char* Destino, int n){
-    for(int i=0; i<n; i++){
-        *(Origen+i) = *(Destino+i);
-    }
-}
 void copiar(char **Origen, char **Destino, int n){
-    /*
+  /*
   Función que se encarga de copiar de un arreglo bidimensional a otro
   */
     for (int i = 0; i < n; ++i){
