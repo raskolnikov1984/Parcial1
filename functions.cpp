@@ -8,7 +8,6 @@ int main_menu(void){
     bool repeat = true;
 
     do{
-
         system("cls");
 
         cout << "\n\n\t\t\tMENU PRINCIPAL" << endl;
@@ -18,9 +17,7 @@ int main_menu(void){
         cout << "\n\t2. Administrar Categorías"<< endl;
         cout << "\t. Transaccionales" << endl;
         cout << "\n\t3. Listar Registros"<< endl;
-
         cout << "\t0. SALIR" << endl;
-
         cout << "\n\tIngrese una option: ";
         cin >> option;
 
@@ -95,10 +92,10 @@ int categories_menu(void){
     do{
         system("cls");
 
-        cout << "\n\n\t\t\tMENU CATEGORIES" <<endl;
-        cout << "\t\t\t-----------------------------------" << endl;
+        cout << "\n\n\t\t\t\tMENU CATEGORIES" <<endl;
+        cout << "\t\t-----------------------------------" << endl;
         cout << "\n\t1. Registrar Categorías" << endl;
-        cout << "\t2. Operaciones variadas" << endl;
+        cout << "\t2. Visualizar Categorías" << endl;
         cout << "\t0. SALIR" << endl;
 
         cout << "\n\tIngrese una option: ";
@@ -143,8 +140,6 @@ char* get_dates_user(int numeroCampo){
 	cout << "\n\t VALOR INCORRECTO, INGRESE ( 0 ) PARA CANCELAR!!!" << endl;
       }else{
 	return Aux;
-	//delete[] Aux;
-	//Aux = nullptr;
       }
     }while(palabra == false || palabra != 0);
     
@@ -158,8 +153,7 @@ char* get_dates_user(int numeroCampo){
     for(int i=0; i < sizeEntero; i++){
       *(Aux+i) = *(charDocument+i);
     }
-  }
-  return Aux;
+  }return Aux;
 }
 
 void user_admin(char** User){
@@ -228,8 +222,8 @@ void user_admin(char** User){
   }
 }
 
-void categories_admin(char** Categorias, char** Aux){
-  /*función que permite administrar categoráis.*/
+char**  categories_admin(char** Categorias, char** Aux, int* n){
+  /*función que permite administrar categorías.*/
   const int charMax = 30; //longitud máxima de caracteres
   int option;
   char* categoria = new char[charMax];
@@ -241,20 +235,36 @@ void categories_admin(char** Categorias, char** Aux){
   switch(option)
     {
     case 1:
-      cout << "\n\t Por favor ingrese el nombre de la categoría: ";
-      categoria = get_dates_user(1) ;
-      cout << categoria;
-      sizeWord = sizeChar(categoria);
-      tamano = &sizeWord;
-      cout<<*tamano;
-      //attach(Categorias, Aux,tamano, categoria);
+      sizeCategorias = *n;
+      if(Categorias == 0){
+	Aux = new char*[*n];
+	copiar(Categorias,Aux,sizeCategorias);
+	*n = *n + 1;
+
+	Categorias = new char*[*n];
+        copiar(Aux,Categorias,sizeCategorias-1);
+        Categorias[*n-1] = new char[charMax];
+	cout << "\n\t Por favor ingrese el nombre de la categoría: ";
+	cin >> Categorias[*n-1];
+       
+      }else{
+	cout << "\n\t Por favor ingrese el nombre de la categoría: ";
+	cin >> Categorias[*n-1];
+	Categorias = attach(Categorias, Aux, n, categoria);
+      }
+      
       break;
     case 2:
-      sizeCategorias = sizeof(Categorias);
-      print_array(Categorias, sizeCategorias);
-    }
-  
+      if(Categorias == 0){
+	sizeCategorias = 0;
+	print_array(Categorias, sizeCategorias);
+      }else{
+	sizeCategorias = *n;
+	print_array(Categorias, sizeCategorias);
+	break;}
+    }return Categorias;
 }
+  
 
 void search_records(void){
     /*función que permita buscar registros dependiendo
@@ -265,11 +275,12 @@ void print_array(char** Array, int n){
     cout << "\n************ Categorias ***********" << endl;
     if (n==0) {
         cout << "   ----- No hay Categorias -----" << endl;
-    }
+    }else{
     for (int i = 0; i < n; ++i) {
         cout << Array[i] << endl;
     }
     cout << "***********************************" << endl;
+    }
 }
 
 void transactions_menu(){
@@ -350,7 +361,7 @@ void get_date_today(void){
   time_t current_time;
   current_time=time(NULL);
   ctime(&current_time);
-   strcpy(fecha, ctime(&current_time));
+  strcpy(fecha, ctime(&current_time));
   printf("%s", fecha);
 }
 
@@ -470,13 +481,6 @@ bool check(char** Arreglo, int n, char* word){
 char** attach(char** Arreglo, char** Almacenar, int* n, char* word){
     /* Función que permite agregar registros al arreglo
      realizando una copia en otro arreglo bidimensional */
-  cout<<Arreglo;
-  if(sizeof(Arreglo) == 8){
-    Arreglo = new char*[*n];
-    for (int i = 0; i < sizeChar(word); i++){
-      Arreglo[*n-1][i] = word[i];
-    }
-  }else{
     if (check(Arreglo,*n,word) == false){
         Almacenar = new char*[*n];
         copiar(Arreglo,Almacenar,*n);
@@ -491,7 +495,5 @@ char** attach(char** Arreglo, char** Almacenar, int* n, char* word){
             Arreglo[*n-1][i] = word[i];
         }
         Arreglo[*n-1][sizeChar(word)]=0;
-
-    }
-  }return Arreglo;
+    }return Arreglo;
 }

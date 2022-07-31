@@ -18,7 +18,7 @@ void transactions_menu();
 
 // Declaración de operaciones administrativas
 void user_admin(char** User);
-void categories_admin(char** Categorias, char** Aux);
+char** categories_admin(char** Categorias, char** Aux, int* n);
 void search_records(void);
 
 void print_array(char** Array, int n);
